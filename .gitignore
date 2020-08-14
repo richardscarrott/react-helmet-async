@@ -1,3 +1,4 @@
-es
-lib
+# Temporarily remove `es` and `lib` so we can reference GitHub directly in package.json
+# es
+# lib
 node_modules
