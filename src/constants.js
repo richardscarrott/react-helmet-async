@@ -5,6 +5,7 @@ export const TAG_PROPERTIES = {
   HTTPEQUIV: 'http-equiv',
   INNER_HTML: 'innerHTML',
   ITEM_PROP: 'itemprop',
+  KEY: 'helmetKey',
   NAME: 'name',
   PROPERTY: 'property',
   REL: 'rel',

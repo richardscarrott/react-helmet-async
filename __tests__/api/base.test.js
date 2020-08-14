@@ -140,5 +140,35 @@ describe('base tag', () => {
       const existingTags = [].slice.call(tagNodes);
       expect(existingTags).toHaveLength(0);
     });
+
+    it('overrides duplicate helmetKey scripts', done => {
+      const scriptInnerHTML = `
+        {
+          "@context": "http://schema.org",
+          "@type": "NewsArticle",
+          "url": "http://localhost/helmet"
+        }
+      `;
+      render(
+        <div>
+          <Helmet>
+            <script helmetKey="helmetKey" innerHTML={'{}'} type="application/ld+json" />
+          </Helmet>
+          <Helmet>
+            <script helmetKey="helmetKey" innerHTML={scriptInnerHTML} type="application/ld+json" />
+          </Helmet>
+        </div>
+      );
+
+      requestAnimationFrame(() => {
+        const scriptNodes = document.head.querySelectorAll(`script[${HELMET_ATTRIBUTE}]`);
+        const existingScripts = Array.prototype.slice.call(scriptNodes);
+
+        expect(existingScripts.length).toBe(1);
+        expect(existingScripts[0].innerHTML).toBe(scriptInnerHTML);
+
+        done();
+      });
+    });
   });
 });
